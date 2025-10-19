@@ -81,10 +81,6 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-        #20251016updategolang
-        echo "🔧 Replacing golang feed with Go 1.25 (kenzok8 version)..."
-        rm -rf feeds/packages/lang/golang
-        git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
