@@ -81,7 +81,15 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-
+    #20251021
+    - name: 升级 Go Bootstrap 版本
+      run: |
+        wget https://go.dev/dl/go1.22.7.linux-amd64.tar.gz
+        sudo rm -rf /usr/local/go
+        sudo tar -C /usr/local -xzf go1.22.7.linux-amd64.tar.gz
+        echo "export GOROOT_BOOTSTRAP=/usr/local/go" >> $GITHUB_ENV
+        go versio
+        
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
