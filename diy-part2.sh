@@ -59,12 +59,12 @@ git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tc
 #git clone https://github.com/sirpdboy/chatgpt-web.git package/luci-app-chatgpt
 git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
 # 更新bootstrap Go版本到1.22.7
-sed -i 's/1.20.6/1.22.7/g' feeds/packages/lang/golang/golang/Makefile
+#sed -i 's/1.20.6/1.22.7/g' feeds/packages/lang/golang/golang/Makefile
 
 # 更新bootstrap tarball的SHA256哈希（替换旧哈希为新哈希）
 # 旧哈希（go1.20.6.linux-amd64.tar.gz）：a2da8e43ab2db5d61d8674b1fbe94e9102293eb69c426fc297bbd777c013af8
 # 新哈希（go1.22.7.linux-amd64.tar.gz）：6bc6f41867869165cd3a8d8fd3b5e65fc1f0decc5f2775ecd3a6c77ca48c151
-sed -i 's/a2da8e43ab2db5d61d8674b1fbe94e9102293eb69c426fc297bbd777c013af8/6bc6f41867869165cd3a8d8fd3b5e65fc1f0decc5f2775ecd3a6c77ca48c151/g' feeds/packages/lang/golang/golang/Makefile
+#sed -i 's/a2da8e43ab2db5d61d8674b1fbe94e9102293eb69c426fc297bbd777c013af8/6bc6f41867869165cd3a8d8fd3b5e65fc1f0decc5f2775ecd3a6c77ca48c151/g' feeds/packages/lang/golang/golang/Makefile
 
 #修改
 #20250125
