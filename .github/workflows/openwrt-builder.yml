@@ -88,7 +88,8 @@ jobs:
         sudo rm -rf /usr/local/go
         sudo tar -C /usr/local -xzf go1.22.7.linux-amd64.tar.gz
         echo "export GOROOT_BOOTSTRAP=/usr/local/go" >> $GITHUB_ENV
-        go versio
+        echo "export PATH=/usr/local/go/bin:$PATH" >> $GITHUB_ENV
+        go version
         
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
