@@ -57,7 +57,8 @@ rm -rf feeds/packages/lang/golang
 
 git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
 #git clone https://github.com/sirpdboy/chatgpt-web.git package/luci-app-chatgpt
-git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
+#git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
 # 更新bootstrap Go版本到1.22.7
 #sed -i 's/1.20.6/1.22.7/g' feeds/packages/lang/golang/golang/Makefile
 
