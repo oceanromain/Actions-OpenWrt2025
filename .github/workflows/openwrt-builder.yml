@@ -111,7 +111,17 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
+    - name: Clean up .git directories before compile
+      if: (!cancelled())
+      run: |
+        cd openwrt
+        echo "Disk space before .git cleanup:"
+        df -hT
+        find build_dir -type d -name ".git" | xargs rm -rf
+        find feeds -type d -name ".git" | xargs rm -rf
+        echo "Disk space after .git cleanup:"
+        df -hT
+        
     - name: Compile the firmware
       id: compile
       run: |
