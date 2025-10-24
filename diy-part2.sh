@@ -84,7 +84,7 @@ git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/l
 #sed -i '8i \ \ \ \ \ \ \ \ entry({"admin", "control"}, firstchild(), "控制", 44).dependent = false' ./feeds/oceanweb/luci-app-autotimeset/luasrc/controller/autotimeset.lua 
 #sed -i '9d' ./feeds/oceanweb/luci-app-autotimeset/luasrc/controller/autotimeset.lua 
 sed -i 's/高级重启/关机/g' feeds/luci/applications/luci-app-advanced-reboot/po/zh-cn/advanced-reboot.po
-chmod +x feeds/kenzo/luci-app-lucky/luci-app-lucky/root/etc/init.d/lucky 
+#chmod +x feeds/kenzo/luci-app-lucky/luci-app-lucky/root/etc/init.d/lucky 
 #chmod +x feeds/oceanweb/luci-app-autotimeset/root/etc/init.d/autotimeset
 #chmod +x feeds/oceanweb/luci-app-beardropper/root/etc/init.d/beardropper
 #chmod +x feeds/oceanweb/luci-app-cowbping/root/etc/init.d/cowbping
