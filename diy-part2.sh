@@ -36,6 +36,10 @@ echo "--------------------------------------------------------------------------
 rm -rf feeds/packages/lang/golang
 #rm -rf feeds/kenzo/*adguardhome*
 #rm -rf feeds/luci/applications/luci-app-softether
+# 20251114
+rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
+rm -rf feeds/packages/utils/v2dat
 
 
 #增加插件
