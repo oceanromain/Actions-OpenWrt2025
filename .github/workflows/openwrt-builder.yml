@@ -104,12 +104,25 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+#    - name: Download package
+#      id: package
+#      run: |
+#        cd openwrt
+#        make defconfig
+#        make download -j8
+#        find dl -size -1024c -exec ls -l {} \;
+#        find dl -size -1024c -exec rm -f {} \;
     - name: Download package
       id: package
       run: |
         cd openwrt
         make defconfig
-        make download -j8
+        # 使用 env 注入变量，优先从官方镜像下载，并缩短超时时间防止卡死
+        make download -j8 \
+          DOWNLOAD_MIRROR="https://sources.openwrt.org/;https://sources.cdn.openwrt.org/" \
+          CURL_OPTIONS="--connect-timeout 5 --retry 1"
+        
+        # 检查下载失败产生的空文件（小于1K的文件通常是错误页面或下载失败残留）
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
     - name: Clean up .git directories before compile
