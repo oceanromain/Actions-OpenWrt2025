@@ -36,11 +36,10 @@ rm -rf feeds/packages/lang/golang
 rm -rf feeds/luci/applications/luci-app-mosdns
 rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
 rm -rf feeds/packages/utils/v2dat
+rm -rf feeds/kenzo/mihomo
 
 
 #增加插件
 
 git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
 git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
-
-
