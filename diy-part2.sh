@@ -43,4 +43,5 @@ rm -rf feeds/kenzo/mihomo
 #增加插件
 
 git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tcpdump
-git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+#git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang -b 1.26 feeds/packages/lang/golang
