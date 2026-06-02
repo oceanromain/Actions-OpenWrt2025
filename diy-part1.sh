@@ -20,8 +20,8 @@
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 #echo 'src-git nas https://github.com/linkease/nas-packages.git' >>feeds.conf.default
 
-#echo 'src-git small https://github.com/kenzok8/small.git' >>feeds.conf.default
-#echo 'src-git oceanweb https://github.com/oceanromain/my-openwrt-package.git' >>feeds.conf.default
+echo 'src-git small https://github.com/kenzok8/small.git' >>feeds.conf.default
+echo 'src-git oceanweb https://github.com/oceanromain/my-openwrt-package.git' >>feeds.conf.default
 #echo 'src-git small https://github.com/oceanromain/small.git' >>feeds.conf.default
 #echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages.git' >>feeds.conf.default
 #echo 'src-git nas https://github.com/linkease/nas-packages.git;master' >>feeds.conf.default
@@ -33,4 +33,4 @@
 #echo 'src-git small_all https://github.com/kenzok8/small-package.git' >> feeds.conf.default
 #echo 'src-git nxx https://github.com/NueXini/NueXini_Packages.git' >> feeds.conf.default
 #sed -i 's/;openwrt-25.12//g' feeds.conf.default
-echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default
+#echo "src-git jell https://github.com/kenzok8/jell" >> feeds.conf.default
