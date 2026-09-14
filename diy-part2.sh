@@ -56,4 +56,6 @@ for GN_MK in $(find feeds -path '*gn/Makefile' 2>/dev/null | grep -E '/(hellowor
   sed -i -E 's|^PKG_MIRROR_HASH:=.*|PKG_MIRROR_HASH:=e6d7fe0f41fbb64f3a5d96d32fdffcc4ad965e7de5ff29aa1439f8a279f167e0|' "$GN_MK"
   grep -E 'PKG_SOURCE_DATE|PKG_SOURCE_VERSION|PKG_MIRROR_HASH' "$GN_MK"
 done
-[ -z "$(find feeds -path '*gn/Makefile' 2>/dev/null | grep -E '/(helloworld|small)/gn/Makefile')" ] && echo "WARNING: gn Makefile not found, skip pin"
+if ! find feeds -path '*gn/Makefile' 2>/dev/null | grep -qE '/(helloworld|small)/gn/Makefile'; then
+  echo "WARNING: gn Makefile not found, skip pin"
+fi
