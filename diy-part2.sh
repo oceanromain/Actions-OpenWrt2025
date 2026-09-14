@@ -47,23 +47,24 @@ git clone https://github.com/KFERMercer/luci-app-tcpdump.git package/luci-app-tc
 git clone https://github.com/kenzok8/golang -b 1.26 feeds/packages/lang/golang
 git clone https://github.com/oceanromain/luci-app-pushbot.git package/luci-app-pushbot
 
-# 2026-09-14 pin gn to immortalwrt-verified 2026-01-14: helloworld/small ship gn 2026-09-02
-# whose new starlark edit_subcommands.cc fails on clang-18 (lambda->Result<function> conversion)
-for GN_MK in $(find feeds -path '*gn/Makefile' 2>/dev/null | grep -E '/(helloworld|small)/gn/Makefile'); do
-  echo "pin gn to 2026-01-14 in $GN_MK"
-  sed -i -E 's|^PKG_SOURCE_DATE:=.*|PKG_SOURCE_DATE:=2026-01-14|' "$GN_MK"
-  sed -i -E 's|^PKG_SOURCE_VERSION:=.*|PKG_SOURCE_VERSION:=103f8b437f5e791e0aef9d5c372521a5d675fabb|' "$GN_MK"
-  sed -i -E 's|^PKG_MIRROR_HASH:=.*|PKG_MIRROR_HASH:=e6d7fe0f41fbb64f3a5d96d32fdffcc4ad965e7de5ff29aa1439f8a279f167e0|' "$GN_MK"
-  grep -E 'PKG_SOURCE_DATE|PKG_SOURCE_VERSION|PKG_MIRROR_HASH' "$GN_MK"
-  # helloworld ships gn patches written for gn 2026-09-02 (old-libstdc++ ranges,
-  # clang<17 c++2b, std::expected fallback); they fail to apply / are unneeded on
-  # 2026-01-14 with gcc-13 libstdc++ + clang-18. ImmortalWrt 2026-01-14 ships zero patches.
-  GN_PATCH_DIR="$(dirname "$GN_MK")/patches"
-  if [ -d "$GN_PATCH_DIR" ]; then
-    echo "removing gn patches (written for newer gn) under $GN_PATCH_DIR"
-    rm -rf "$GN_PATCH_DIR"
-  fi
+# 2026-09-14 restore gn to helloworld 2026-08-13 state. The 2026-09-02 bump (committed the
+# day before the build, unverified) breaks host build on clang-18; 2026-08-13 is the combo that
+# shipped alongside naiveproxy 150 and carries 030-fix-clang-18-and-earlier-expected.patch.
+# Overwrite Makefile + restore ALL patches (must not delete them). helloworld feed wins gn.
+GN_REF=ea28a364eab5d1e42daa99a7f3d83e6244d944e3
+GN_BASE="https://raw.githubusercontent.com/fw876/helloworld/$GN_REF/gn"
+GN_PATCHES="010-gn-fix-old-libstdcxx-ranges-unique.patch 020-clang-host-compat.patch 030-fix-clang-18-and-earlier-expected.patch 040-remove-check_all-target.patch"
+for GN_DIR in feeds/helloworld/gn feeds/small/gn; do
+  [ -d "$GN_DIR" ] || continue
+  echo "restoring $GN_DIR to gn 2026-08-13"
+  curl -fsSL "$GN_BASE/Makefile" -o "$GN_DIR/Makefile"
+  rm -rf "$GN_DIR/patches"
+  mkdir -p "$GN_DIR/patches"
+  for p in $GN_PATCHES; do
+    curl -fsSL "$GN_BASE/patches/$p" -o "$GN_DIR/patches/$p"
+  done
+  mkdir -p "$GN_DIR/src/out"
+  curl -fsSL "$GN_BASE/src/out/last_commit_position.h" -o "$GN_DIR/src/out/last_commit_position.h" || true
+  grep -E 'PKG_SOURCE_DATE|PKG_SOURCE_VERSION' "$GN_DIR/Makefile"
+  echo "patches: $(ls "$GN_DIR/patches" | wc -l) file(s)"
 done
-if ! find feeds -path '*gn/Makefile' 2>/dev/null | grep -qE '/(helloworld|small)/gn/Makefile'; then
-  echo "WARNING: gn Makefile not found, skip pin"
-fi
